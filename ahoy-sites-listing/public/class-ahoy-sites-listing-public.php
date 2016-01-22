@@ -135,17 +135,21 @@ class Ahoy_Sites_Listing_Public {
         return $sites;
     }
     
+    
     /**
-	 * Fetch the information from the API.
+	 * Fetch the information from the API, if not present in cache.
 	 *
 	 * @since    1.0.0
 	 */
     private function getWebsites()
     {
-        $response = wp_remote_get( "http://".$this->address."/api/sites" );
-        
-        if( is_array($response) ) {
-            $body = $response['body']; // use the content
+        $body = wp_cache_get( 'sitesList' );
+        if ( false === $result ) {
+            $response = wp_remote_get( "http://".$this->address."/api/sites" );
+            if( is_array($response) ) {
+                $body = $response['body']; // use the content
+            }
+            wp_cache_set( 'sitesList', $body, '', 600 );
         }
         return $body;
     }
