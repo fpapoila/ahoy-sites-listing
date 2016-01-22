@@ -1,4 +1,4 @@
-.censored
+.censored:hover
 {
     text-decoration: line-through;
 }
