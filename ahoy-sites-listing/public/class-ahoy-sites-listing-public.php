@@ -149,7 +149,7 @@ class Ahoy_Sites_Listing_Public {
             if( is_array($response) ) {
                 $body = $response['body']; // use the content
             }
-            wp_cache_set( 'sitesList', $body, '', 600 );
+            wp_cache_set( 'sitesList', $body, '', 5 * MINUTE_IN_SECONDS );
         }
         return $body;
     }
